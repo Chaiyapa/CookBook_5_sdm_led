@@ -1,54 +1,28 @@
-| Supported Targets | ESP32 | ESP32-C3 | ESP32-C6 | ESP32-H2 | ESP32-P4 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- | -------- |
+# Example นี้แสดงวิธีการใช้ Sigma-Delta ไดรเวอร์เพื่อสร้างเอาต์พุตแบบมอดูเลตบนขา GPIO ซึ่งหากเชื่อมต่อ LED หรือตัวควบคุมแสงพื้นหลังของจอ LCD เข้ากับขา GPIO นี้ คุณจะสังเกตเห็นความสว่างของ LED ที่ค่อยๆ เพิ่มขึ้นและลดลง (สว่างขึ้นและหรี่ลง)
 
-# Sigma Delta Modulation LED Example
+เริ่มจากการเลือกใน Show Example
+![image](https://github.com/user-attachments/assets/b17e825a-3100-452b-9cad-0862885044e2)
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
+กด Create project แล้วจะพบหน้าต่างนี้
+![image](https://github.com/user-attachments/assets/80be8aca-d370-4cf8-8f43-6d4014e4c6cb)
 
-This example uses the sigma-delta driver to generate modulated output on a GPIO. If you connect a LED or LCD backlight control to the output GPIO, you will see it slowly brightening and dimming.
+ให้เราเลือก port ให้ตรงกับบอร์ด esp เสร็จแล้วให้ Build และ Flash ลงบอร์ด
 
-## How to use example
+เมื่อ Flash เสร็จแล้วจะพบข้อความประมาณนี้ดังนี้
 
-### Hardware Required
+![image](https://github.com/user-attachments/assets/e9db9bb6-35dc-437f-b034-5691828cfc92)
 
-* A development board with any supported Espressif SoC (e.g., ESP32-DevKitC, ESP-WROVER-KIT, etc.)
-* A USB cable for Power supply and programming
-* An LED and a resistor to limit the LED current. Connect them as below:
 
-```
-                                   330R            LED
-EXAMPLE_SIGMA_DELTA_GPIO_NUM +----/\/\/\----+------|>|-----+ GND
-```
+ต่อ gpio ที่ ขา 0 ที่led 
+| gpio 0 |
+|------- | 
 
-### Configure the project
+![image](https://github.com/user-attachments/assets/f740e479-9bb8-4cb0-9101-0738fc976c0c)
 
-You can change the GPIO number by [EXAMPLE_SIGMA_DELTA_GPIO_NUM](main/sdm_led_example_main.c).
+สังเกตที่led ไฟจะค่อยๆสว่างขึ้นและค่อยดับลง
 
-### Build and Flash
+สามารถเปลี่ยน gpio ได้ที่ตรงนี้
 
-Build the project and flash it to the board, then run the monitor tool to view the serial output:
+![image](https://github.com/user-attachments/assets/f1ad9f57-2cb7-41ac-8479-853dc20a8d02)
 
-Run `idf.py -p PORT flash monitor` to build, flash and monitor the project.
 
-(To exit the serial monitor, type ``Ctrl-]``.)
-
-See the [Getting Started Guide](https://docs.espressif.com/projects/esp-idf/en/latest/get-started/index.html) for full steps to configure and use ESP-IDF to build projects.
-
-## Example Output
-
-Once the upload is complete and the board is reset, the program should start running. This is reported on the monitor as below:
-
-```
-...
-I (245) cpu_start: Starting scheduler.
-I (249) example: Install sigma delta channel
-I (249) gpio: GPIO[0]| InputEn: 0| OutputEn: 1| OpenDrain: 0| Pullup: 1| Pulldown: 0| Intr:0
-I (259) example: Enable sigma delta channel
-I (259) example: Change duty cycle continuously
-```
-
-Immediately after that the LED should start brightening and dimming.
-
-## Troubleshooting
-
-For any technical queries, please open an [issue](https://github.com/espressif/esp-idf/issues) on GitHub. We will get back to you soon.
